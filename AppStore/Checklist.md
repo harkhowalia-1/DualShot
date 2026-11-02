@@ -5,7 +5,7 @@ Done and ready:
 - [x] Signed App Store build, version 1.0 (1): in Xcode › Window › Organizer, and `build/DualShot-1.0-AppStore.ipa` (not in git)
 - [x] Privacy manifest, export compliance, permission texts
 - [x] Listing text, keywords, review notes and privacy answers: [Metadata.md](Metadata.md)
-- [x] Six 6.9-inch screenshots: [Screenshots/](Screenshots)
+- [x] Six screenshots: [Screenshots-6.3in/](Screenshots-6.3in) (required) and [Screenshots-6.9in/](Screenshots-6.9in) (large displays)
 - [x] Privacy policy, support and marketing pages (live on GitHub Pages)
 
 Your steps (about 20 minutes):

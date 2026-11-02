@@ -6,8 +6,8 @@ Copy each field into App Store Connect. Character counts are already within Appl
 
 | Field | Value |
 |---|---|
-| Name (30) | `DualShot: Front & Back Camera` (29) |
-| Subtitle (30) | `Record both cameras at once` (27) |
+| Name (30) | `DualShot – Dual Camera` (22) ("DualShot: Front & Back Camera" was taken) |
+| Subtitle (30) | `Front & Back Camera at Once` (27) |
 | Bundle ID | `com.harkhowalia.dualshot` |
 | SKU | `dualshot-ios` |
 | Primary language | English (U.S.) |
