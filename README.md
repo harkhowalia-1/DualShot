@@ -2,7 +2,7 @@
 
 <h1 align="center">DualShot</h1>
 <p align="center"><b>Front and back camera at the same time, on the iPhone you already have.</b></p>
-<p align="center"><a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · App Store release coming soon</p>
+<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · App Store release coming soon</p>
 
 ---
 
@@ -32,6 +32,14 @@ DualShot uses that ability, so you get dual-camera video and photos on the iPhon
 - iPhone XS, XS Max, XR or newer (A12 chip or later), iOS 17 or later
 - Tested on iPhone 14 Pro. Reports from other models are welcome in [Issues](https://github.com/harkhowalia-1/DualShot/issues).
 - iPad support is planned.
+
+## Install
+
+1. Download [DualShot-unsigned.ipa](https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa) from the [latest release](https://github.com/harkhowalia-1/DualShot/releases/latest).
+2. Install it with a sideloading tool that signs it with your Apple ID, such as [AltStore](https://altstore.io) or [Sideloadly](https://sideloadly.io).
+3. On the iPhone, allow it in Settings › General › VPN & Device Management.
+
+With a free Apple ID, sideloaded apps need re-signing every 7 days.
 
 ## Build it yourself
 
