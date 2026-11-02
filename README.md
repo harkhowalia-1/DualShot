@@ -22,7 +22,7 @@ DualShot uses that ability, so you get dual-camera video and photos on the iPhon
 - **Two cameras, two files.** The back and front cameras are saved as separate videos, ready to edit, plus a combined video in your layout.
 - **Picture in picture or split.** Drag the front window to any corner, or split the screen.
 - **Photo mode.** Take a photo with both cameras at once, in HEIF or JPEG, with flash and a self-timer.
-- **Zoom while recording.** Switch between .5×, 1×, 2× and 3× mid-take; DualShot handles the lens pairs your iPhone can run next to the front camera.
+- **Zoom while recording.** Change zoom mid-take across every back lens your iPhone has (up to 3× on Pro models). On Pros that can't run all three lenses next to the front camera, a Back Lenses control picks the pair; iPhones with one or two back lenses never see it.
 - **Heat-Up Settings.** Lowers the frame rate as the iPhone warms up, so long takes keep going.
 - **Matched to your iPhone.** On first launch it measures what your iPhone can do, and offers only the resolutions and frame rates that will work, up to 4K.
 - **Feels like the Camera app.** Controls are laid out the way iOS 27's Camera arranges them, including a customisable top row.
