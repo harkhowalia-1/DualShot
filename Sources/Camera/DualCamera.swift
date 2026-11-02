@@ -1236,7 +1236,11 @@ final class DualCamera: NSObject {
         displayZoom = 1
         hasTorch = true
 
+        // Real photos for App Store screenshots: -DemoBack <path> -DemoFront <path>.
+        let defaults = UserDefaults.standard
+        func photo(_ key: String) -> UIImage? { defaults.string(forKey: key).flatMap(UIImage.init(contentsOfFile:)) }
         func picture(_ kind: DemoFeed.Kind, _ size: CGSize) -> UIImage? {
+            if let real = photo(kind == .back ? "DemoBack" : "DemoFront") { return real }
             let renderer = ImageRenderer(content: DemoFeed(kind: kind).frame(width: size.width, height: size.height))
             renderer.scale = 2
             return renderer.uiImage

@@ -1,95 +1,125 @@
 import AppKit
 
-// App Store screenshots that tell DualShot's story: a headline with one highlighted word,
-// a short supporting line, the app in a phone frame, and callout badges.
-// Usage: swift story.swift <raw screens dir> <out dir> <width> <height>
+// App Store screenshots in the style of Apple's own iPhone campaigns: white background,
+// a short headline and supporting line, and the app running in a lavender iPhone.
+// Usage: swift make-screenshots.swift <app screens dir> <out dir> <width> <height>
+// App screens come from the Simulator in demo mode (see README "Screenshots").
 
 let args = CommandLine.arguments
-let rawDir = args[1], outDir = args[2]
+let screensDir = args[1], outDir = args[2]
 let W = CGFloat(Double(args[3])!), H = CGFloat(Double(args[4])!)
-let s = W / 1206   // everything is laid out for 1206 wide, then scaled
+let s = W / 1206   // laid out for 1206 × 2622, scaled for other sizes
 
-struct Badge { let symbol: String; let text: String; let tint: NSColor }
-struct Slide {
-    let screen: String
-    let before: String, highlight: String, after: String   // headline: before + highlight + after
-    let sub: String
-    let top: [Badge]       // a row of badges above the phone
-    let side: [Badge]      // badges floating over the phone
-    /// Where the first side badge sits, as a fraction of the phone's height from its bottom;
-    /// higher on slides whose screen has a sheet at the bottom.
-    var sideAt: CGFloat = 0.42
-}
-
-let orange = NSColor(srgbRed: 1.0, green: 0.68, blue: 0.27, alpha: 1)
-let blue = NSColor(srgbRed: 0.48, green: 0.58, blue: 1.0, alpha: 1)
-let green = NSColor(srgbRed: 0.30, green: 0.85, blue: 0.50, alpha: 1)
-let white = NSColor.white
+struct Slide { let screen: String; let headline: String; let sub: String }
 
 let slides: [Slide] = [
-    Slide(screen: "recording", before: "Film the moment\n", highlight: "and", after: " your reaction.",
-          sub: "Front and back cameras record at the same time.",
-          top: [Badge(symbol: "checkmark.seal.fill", text: "Works on iPhone XS and newer", tint: green)],
-          side: [Badge(symbol: "camera.fill", text: "Back camera", tint: orange),
-                 Badge(symbol: "person.crop.square.fill", text: "Front camera", tint: blue)]),
-    Slide(screen: "pip", before: "No new iPhone\n", highlight: "needed.", after: "",
-          sub: "Dual-camera video on the iPhone you already own.",
-          top: [Badge(symbol: "iphone", text: "XS · XR · 11 · 12 · 13 · 14 · 15 · 16", tint: white)],
-          side: [Badge(symbol: "dollarsign.circle.fill", text: "Skip the upgrade", tint: green)]),
-    Slide(screen: "files", before: "Two cameras.\n", highlight: "Three", after: " files.",
-          sub: "Back, front and combined, saved separately and ready to edit.",
-          top: [],
-          side: [Badge(symbol: "film.fill", text: "Back.mov", tint: orange),
-                 Badge(symbol: "film.fill", text: "Front.mov", tint: blue),
-                 Badge(symbol: "rectangle.on.rectangle", text: "Combined.mov", tint: white)], sideAt: 0.70),
-    Slide(screen: "split", before: "Picture in picture\n", highlight: "or", after: " split screen.",
-          sub: "Drag the window anywhere. Your video follows.",
-          top: [], side: [Badge(symbol: "hand.draw.fill", text: "Drag to any corner", tint: white)]),
-    Slide(screen: "photo", before: "Both cameras.\n", highlight: "One", after: " tap.",
-          sub: "Photos of the view and you, taken at the same moment.",
-          top: [], side: [Badge(symbol: "camera.aperture", text: "HEIF or JPEG", tint: white),
-                          Badge(symbol: "timer", text: "Self-timer", tint: orange)]),
-    Slide(screen: "heat", before: "Records longer.\n", highlight: "Stays cool.", after: "",
-          sub: "Heat-Up Settings keep long takes going.",
-          top: [], side: [Badge(symbol: "thermometer.medium", text: "Smart heat control", tint: orange)], sideAt: 0.62),
-    Slide(screen: "format", before: "Up to ", highlight: "4K,", after: "\ntuned to your iPhone.",
-          sub: "DualShot offers only what your iPhone can really record.",
-          top: [], side: [Badge(symbol: "sparkles", text: "Measured on first launch", tint: white)], sideAt: 0.62),
+    Slide(screen: "1-mountain", headline: "Record yourself\nand the world around you.",
+          sub: "Front and back video, captured at the same time."),
+    Slide(screen: "2-concert", headline: "Works on the iPhone\nyou already have.",
+          sub: "Dual-camera video on iPhone XS and later. No upgrade needed."),
+    Slide(screen: "3-tokyo", headline: "Two cameras.\nTwo separate files.",
+          sub: "The back and front save as their own videos, plus one combined, ready to edit."),
+    Slide(screen: "4-beach", headline: "Picture in picture.\nOr split screen.",
+          sub: "Move the window anywhere. Your video keeps the layout."),
+    Slide(screen: "5-birthday", headline: "Both sides\nof every moment.",
+          sub: "Take photos with the front and back cameras at once."),
+    Slide(screen: "6-festival", headline: "Made for\nlong takes.",
+          sub: "Heat-Up Settings lower the frame rate before your iPhone gets too warm."),
 ]
 
-func roundRect(_ r: NSRect, _ radius: CGFloat) -> NSBezierPath { NSBezierPath(roundedRect: r, xRadius: radius, yRadius: radius) }
+func rr(_ r: NSRect, _ radius: CGFloat) -> NSBezierPath { NSBezierPath(roundedRect: r, xRadius: radius, yRadius: radius) }
+func color(_ hex: UInt32, _ a: CGFloat = 1) -> NSColor {
+    NSColor(srgbRed: CGFloat((hex >> 16) & 0xFF) / 255, green: CGFloat((hex >> 8) & 0xFF) / 255, blue: CGFloat(hex & 0xFF) / 255, alpha: a)
+}
 
-/// A frosted capsule with an SF Symbol and a label. Returns its size; draws when `at` is given.
-@discardableResult
-func badge(_ b: Badge, at origin: NSPoint?) -> NSSize {
-    let font = NSFont.systemFont(ofSize: 40 * s, weight: .semibold)
-    let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: NSColor.white]
-    let textSize = (b.text as NSString).size(withAttributes: attrs)
-    let iconSize = 44 * s, padX = 30 * s, gap = 16 * s, h = 92 * s
-    let size = NSSize(width: padX * 2 + iconSize + gap + textSize.width, height: h)
-    guard let o = origin else { return size }
-    let rect = NSRect(origin: o, size: size)
-    NSGraphicsContext.saveGraphicsState()
-    let sh = NSShadow(); sh.shadowColor = NSColor.black.withAlphaComponent(0.35); sh.shadowBlurRadius = 30 * s; sh.shadowOffset = NSSize(width: 0, height: -8 * s); sh.set()
-    NSColor(srgbRed: 0.10, green: 0.11, blue: 0.20, alpha: 0.88).setFill(); roundRect(rect, h / 2).fill()
-    NSGraphicsContext.restoreGraphicsState()
-    NSColor.white.withAlphaComponent(0.18).setStroke(); let border = roundRect(rect.insetBy(dx: 1.5 * s, dy: 1.5 * s), h / 2); border.lineWidth = 3 * s; border.stroke()
-    // Symbols are drawn as a mask, then filled with the badge's colour.
-    let config = NSImage.SymbolConfiguration(pointSize: iconSize * 0.85, weight: .semibold)
-    if let symbol = NSImage(systemSymbolName: b.symbol, accessibilityDescription: nil)?.withSymbolConfiguration(config) {
-        let isz = symbol.size
-        let scale = min(iconSize / isz.width, iconSize / isz.height)
-        let iw = isz.width * scale, ih = isz.height * scale
-        let tinted = NSImage(size: NSSize(width: iw, height: ih), flipped: false) { r in
-            symbol.draw(in: r)
-            b.tint.set()
-            r.fill(using: .sourceAtop)
-            return true
-        }
-        tinted.draw(in: NSRect(x: o.x + padX + (iconSize - iw) / 2, y: o.y + (h - ih) / 2, width: iw, height: ih))
+/// The iPhone mockup from AppStore/mockup.png, if present: its white screen area is cut out
+/// (flood-filled from the centre), so the app shows through while the frame, corners and
+/// Dynamic Island stay exactly as drawn.
+struct Mockup { let frame: NSImage; let screen: NSRect; let size: NSSize }
+let mockup: Mockup? = {
+    let path = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("mockup.png").path
+    guard let data = FileManager.default.contents(atPath: path), let src = NSBitmapImageRep(data: data) else { return nil }
+    let w = src.pixelsWide, h = src.pixelsHigh
+    let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: w, pixelsHigh: h, bitsPerSample: 8, samplesPerPixel: 4,
+                               hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: w * 4, bitsPerPixel: 32)!
+    NSGraphicsContext.saveGraphicsState(); NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+    src.draw(in: NSRect(x: 0, y: 0, width: w, height: h)); NSGraphicsContext.restoreGraphicsState()
+    let px = rep.bitmapData!
+    func white(_ i: Int) -> Bool { px[i] > 225 && px[i + 1] > 225 && px[i + 2] > 225 && px[i + 3] > 200 }
+    var stack = [(w / 2, h / 2)], seen = [Bool](repeating: false, count: w * h)
+    var minX = w, maxX = 0, minY = h, maxY = 0
+    while let (x, y) = stack.popLast() {
+        guard x >= 0, y >= 0, x < w, y < h, !seen[y * w + x] else { continue }
+        seen[y * w + x] = true
+        let i = (y * w + x) * 4
+        guard white(i) else { continue }
+        px[i + 3] = 0; px[i] = 0; px[i + 1] = 0; px[i + 2] = 0
+        minX = min(minX, x); maxX = max(maxX, x); minY = min(minY, y); maxY = max(maxY, y)
+        stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
     }
-    (b.text as NSString).draw(at: NSPoint(x: o.x + padX + iconSize + gap, y: o.y + (h - textSize.height) / 2), withAttributes: attrs)
-    return size
+    let image = NSImage(size: NSSize(width: w, height: h)); image.addRepresentation(rep)
+    // Bitmap rows run top-down; drawing coordinates run bottom-up.
+    return Mockup(frame: image, screen: NSRect(x: minX, y: h - 1 - maxY, width: maxX - minX + 1, height: maxY - minY + 1),
+                  size: NSSize(width: w, height: h))
+}()
+
+/// The mockup with `screen` showing through its cut-out, filling it like a photo (aspect fill).
+func drawMockup(_ m: Mockup, _ screen: NSImage, width: CGFloat, top: CGFloat) {
+    let k = width / m.size.width
+    let frame = NSRect(x: (W - width) / 2, y: top - m.size.height * k, width: width, height: m.size.height * k)
+    let hole = NSRect(x: frame.minX + m.screen.minX * k, y: frame.minY + m.screen.minY * k, width: m.screen.width * k, height: m.screen.height * k)
+    let fill = max(hole.width / screen.size.width, hole.height / screen.size.height)
+    let drawn = NSRect(x: hole.midX - screen.size.width * fill / 2, y: hole.midY - screen.size.height * fill / 2,
+                       width: screen.size.width * fill, height: screen.size.height * fill)
+    NSGraphicsContext.saveGraphicsState()
+    let shadow = NSShadow(); shadow.shadowColor = NSColor.black.withAlphaComponent(0.14); shadow.shadowBlurRadius = 70 * s; shadow.shadowOffset = NSSize(width: 0, height: -30 * s); shadow.set()
+    m.frame.draw(in: frame)
+    NSGraphicsContext.restoreGraphicsState()
+    NSGraphicsContext.saveGraphicsState(); NSBezierPath(rect: hole).addClip(); screen.draw(in: drawn); NSGraphicsContext.restoreGraphicsState()
+    m.frame.draw(in: frame)
+}
+
+/// A lavender iPhone with a black bezel and Dynamic Island, with `screen` inside.
+func drawPhone(_ screen: NSImage, screenWidth: CGFloat, top: CGFloat) {
+    let sw = screenWidth, sh = sw * 2622 / 1206
+    let bezel = sw * 0.032, rim = sw * 0.016
+    let outer = NSRect(x: (W - sw) / 2 - bezel - rim, y: top - sh - 2 * (bezel + rim),
+                       width: sw + 2 * (bezel + rim), height: sh + 2 * (bezel + rim))
+    let outerR = outer.width * 0.165
+
+    // Side buttons, behind the frame.
+    let lavender = NSGradient(colors: [color(0xE6DFF2), color(0xCBC0E0), color(0xE9E4F4)])!
+    let bw = rim * 1.4
+    for (y, h) in [(0.80, 0.045), (0.71, 0.075), (0.62, 0.075)] {
+        let r = NSRect(x: outer.minX - bw * 0.6, y: outer.minY + outer.height * CGFloat(y) - outer.height * CGFloat(h), width: bw * 2, height: outer.height * CGFloat(h))
+        lavender.draw(in: rr(r, bw), angle: 0)
+    }
+    let power = NSRect(x: outer.maxX - bw * 1.4, y: outer.minY + outer.height * 0.60, width: bw * 2, height: outer.height * 0.11)
+    lavender.draw(in: rr(power, bw), angle: 180)
+
+    // Soft shadow, then the lavender aluminium rim.
+    NSGraphicsContext.saveGraphicsState()
+    let shadow = NSShadow(); shadow.shadowColor = NSColor.black.withAlphaComponent(0.16); shadow.shadowBlurRadius = 70 * s; shadow.shadowOffset = NSSize(width: 0, height: -30 * s); shadow.set()
+    color(0xD6CEE8).setFill(); rr(outer, outerR).fill()
+    NSGraphicsContext.restoreGraphicsState()
+    lavender.draw(in: rr(outer, outerR), angle: -35)
+    color(0xB4A8CC).setStroke(); let edge = rr(outer.insetBy(dx: 1 * s, dy: 1 * s), outerR); edge.lineWidth = 2 * s; edge.stroke()
+
+    // Black bezel and the screen.
+    let bezelRect = outer.insetBy(dx: rim, dy: rim)
+    NSColor.black.setFill(); rr(bezelRect, outerR - rim).fill()
+    let screenRect = bezelRect.insetBy(dx: bezel, dy: bezel)
+    NSGraphicsContext.saveGraphicsState(); rr(screenRect, outerR - rim - bezel).addClip(); screen.draw(in: screenRect); NSGraphicsContext.restoreGraphicsState()
+
+    // Dynamic Island, with the green camera-in-use dot and the front lens.
+    let iw = sw * 0.30, ih = sw * 0.088
+    let island = NSRect(x: W / 2 - iw / 2, y: screenRect.maxY - sw * 0.035 - ih, width: iw, height: ih)
+    NSColor.black.setFill(); rr(island, ih / 2).fill()
+    let dot = ih * 0.20
+    color(0x34C759).setFill(); NSBezierPath(ovalIn: NSRect(x: island.maxX - ih * 1.45, y: island.midY - dot / 2, width: dot, height: dot)).fill()
+    let lens = ih * 0.34
+    color(0x1B1E3A).setFill(); NSBezierPath(ovalIn: NSRect(x: island.maxX - ih * 0.78, y: island.midY - lens / 2, width: lens, height: lens)).fill()
+    color(0x3A4380).setFill(); NSBezierPath(ovalIn: NSRect(x: island.maxX - ih * 0.78 + lens * 0.3, y: island.midY - lens * 0.2, width: lens * 0.4, height: lens * 0.4)).fill()
 }
 
 for (i, slide) in slides.enumerated() {
@@ -98,70 +128,32 @@ for (i, slide) in slides.enumerated() {
     rep.size = NSSize(width: W, height: H)
     NSGraphicsContext.saveGraphicsState()
     NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
-    let canvas = NSRect(x: 0, y: 0, width: W, height: H)
+    NSColor.white.setFill(); NSRect(x: 0, y: 0, width: W, height: H).fill()
 
-    // Night-sky background in the icon's colours, with warm and cool glows.
-    NSGradient(colors: [NSColor(srgbRed: 0.16, green: 0.18, blue: 0.40, alpha: 1),
-                        NSColor(srgbRed: 0.06, green: 0.07, blue: 0.16, alpha: 1)])!.draw(in: canvas, angle: -90)
-    let warm = NSGradient(colors: [orange.withAlphaComponent(0.45), orange.withAlphaComponent(0)])!
-    warm.draw(fromCenter: NSPoint(x: W * 0.92, y: H * 0.80), radius: 0, toCenter: NSPoint(x: W * 0.92, y: H * 0.80), radius: 700 * s, options: [])
-    let cool = NSGradient(colors: [blue.withAlphaComponent(0.40), blue.withAlphaComponent(0)])!
-    cool.draw(fromCenter: NSPoint(x: W * 0.05, y: H * 0.25), radius: 0, toCenter: NSPoint(x: W * 0.05, y: H * 0.25), radius: 760 * s, options: [])
-
-    // Headline with one highlighted word.
-    let p = NSMutableParagraphStyle(); p.alignment = .center; p.lineSpacing = -6 * s
-    let hFont = NSFont.systemFont(ofSize: 108 * s, weight: .heavy)
-    let headline = NSMutableAttributedString(string: slide.before, attributes: [.font: hFont, .foregroundColor: NSColor.white, .paragraphStyle: p, .kern: -2.5 * s])
-    headline.append(NSAttributedString(string: slide.highlight, attributes: [.font: hFont, .foregroundColor: orange, .paragraphStyle: p, .kern: -2.5 * s]))
-    headline.append(NSAttributedString(string: slide.after, attributes: [.font: hFont, .foregroundColor: NSColor.white, .paragraphStyle: p, .kern: -2.5 * s]))
-    let topMargin = 150 * s * (H / W) / (2622.0 / 1206.0)
-    let hRect = NSRect(x: 50 * s, y: H - topMargin - 270 * s, width: W - 100 * s, height: 270 * s)
-    headline.draw(with: hRect, options: [.usesLineFragmentOrigin])
-    let subAttrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 46 * s, weight: .medium),
-                                                   .foregroundColor: NSColor.white.withAlphaComponent(0.75), .paragraphStyle: p]
-    let subRect = NSRect(x: 90 * s, y: hRect.minY - 140 * s, width: W - 180 * s, height: 130 * s)
+    let p = NSMutableParagraphStyle(); p.alignment = .center; p.lineHeightMultiple = 0.95
+    let headAttrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 92 * s, weight: .bold),
+                                                    .foregroundColor: color(0x1D1D1F), .paragraphStyle: p, .kern: -1.6 * s]
+    let top = H - 150 * s * (H / W) / (2622.0 / 1206.0)
+    let headRect = NSRect(x: 40 * s, y: top - 240 * s, width: W - 80 * s, height: 240 * s)
+    (slide.headline as NSString).draw(with: headRect, options: [.usesLineFragmentOrigin], attributes: headAttrs)
+    let subAttrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 44 * s, weight: .regular),
+                                                   .foregroundColor: color(0x6E6E73), .paragraphStyle: p]
+    let subRect = NSRect(x: 110 * s, y: headRect.minY - 140 * s, width: W - 220 * s, height: 130 * s)
     (slide.sub as NSString).draw(with: subRect, options: [.usesLineFragmentOrigin], attributes: subAttrs)
 
-    // Badges above the phone.
-    var phoneTop = subRect.minY - 40 * s
-    if !slide.top.isEmpty {
-        let sizes = slide.top.map { badge($0, at: nil) }
-        let total = sizes.reduce(0) { $0 + $1.width } + CGFloat(sizes.count - 1) * 20 * s
-        var x = (W - total) / 2
-        let y = phoneTop - sizes[0].height
-        for (b, sz) in zip(slide.top, sizes) { badge(b, at: NSPoint(x: x, y: y)); x += sz.width + 20 * s }
-        phoneTop = y - 40 * s
-    }
-
-    // The phone: a dark bezel around the app screen, running off the bottom edge.
-    let screen = NSImage(contentsOfFile: "\(rawDir)/\(slide.screen).png")!
-    let bezel = 26 * s
-    let screenW = 900 * s, screenH = screenW * 2622 / 1206
-    let phone = NSRect(x: (W - screenW) / 2 - bezel, y: phoneTop - screenH - bezel * 2, width: screenW + bezel * 2, height: screenH + bezel * 2)
-    let corner = 150 * s
-    NSGraphicsContext.saveGraphicsState()
-    let shadow = NSShadow(); shadow.shadowColor = NSColor.black.withAlphaComponent(0.55); shadow.shadowBlurRadius = 90 * s; shadow.shadowOffset = NSSize(width: 0, height: -30 * s); shadow.set()
-    NSColor(srgbRed: 0.07, green: 0.07, blue: 0.09, alpha: 1).setFill(); roundRect(phone, corner).fill()
-    NSGraphicsContext.restoreGraphicsState()
-    NSColor(white: 0.45, alpha: 1).setStroke(); let rim = roundRect(phone.insetBy(dx: 3 * s, dy: 3 * s), corner - 3 * s); rim.lineWidth = 5 * s; rim.stroke()
-    let screenRect = phone.insetBy(dx: bezel, dy: bezel)
-    NSGraphicsContext.saveGraphicsState(); roundRect(screenRect, corner - bezel).addClip(); screen.draw(in: screenRect); NSGraphicsContext.restoreGraphicsState()
-    // Dynamic Island.
-    let island = NSRect(x: W / 2 - 110 * s, y: screenRect.maxY - 30 * s - 64 * s, width: 220 * s, height: 64 * s)
-    NSColor.black.setFill(); roundRect(island, 32 * s).fill()
-
-    // Badges over the lower half of the phone, alternating sides like annotations.
-    let sizes = slide.side.map { badge($0, at: nil) }
-    var y = phone.minY + phone.height * slide.sideAt
-    for (j, (b, sz)) in zip(slide.side, sizes).enumerated() {
-        let x = j % 2 == 0 ? max(40 * s, phone.minX - 60 * s) : min(W - sz.width - 40 * s, phone.maxX - sz.width + 60 * s)
-        badge(b, at: NSPoint(x: x, y: y))
-        y -= sz.height + 34 * s
+    let screen = NSImage(contentsOfFile: "\(screensDir)/\(slide.screen).png")!
+    let available = subRect.minY - 70 * s - 110 * s
+    let screenWidth = min(860 * s, available / (2622.0 / 1206.0 + 0.1))
+    if let m = mockup {
+        let height = subRect.minY - 60 * s - 90 * s
+        drawMockup(m, screen, width: min(1000 * s, height * m.size.width / m.size.height), top: subRect.minY - 60 * s)
+    } else {
+        drawPhone(screen, screenWidth: screenWidth, top: subRect.minY - 60 * s)
     }
 
     NSGraphicsContext.restoreGraphicsState()
-    // JPEG has no alpha channel, so the (fully opaque) canvas is saved flat, as App Store Connect requires.
-    try! rep.representation(using: .jpeg, properties: [.compressionFactor: 0.95])!
-        .write(to: URL(fileURLWithPath: "\(outDir)/\(i + 1)-\(slide.screen).jpg"))
+    // JPEG has no alpha channel, so the opaque canvas is saved flat, as App Store Connect requires.
+    try! rep.representation(using: .jpeg, properties: [.compressionFactor: 0.94])!
+        .write(to: URL(fileURLWithPath: "\(outDir)/\(slide.screen).jpg"))
 }
 print("done")
