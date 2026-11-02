@@ -29,6 +29,7 @@
 		CFBC7F843C9D28DF3E09A6D0 /* DualCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C332FE1EEF65AE76D7FEF /* DualCamera.swift */; };
 		E3BAEB5D7ED5A4D83BA0186E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6F9930CF2EB1FB6E89796F /* CameraView.swift */; };
 		E95F07584E0875DB270D3B41 /* DualViewfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD50EFB407E91872383E26A /* DualViewfinder.swift */; };
+		F1819A93CF6C137F08252FFD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8C8C1EA5BD6AE4B0631DC6F4 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		5BCE6467AB702131E17B21FF /* PhotoSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSaver.swift; sourceTree = "<group>"; };
 		7290B2C1CF37267828F21788 /* DualShotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualShotApp.swift; sourceTree = "<group>"; };
 		757421C092608C94E6954460 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C8C1EA5BD6AE4B0631DC6F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		922AC69C6593240103A06279 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		944C332FE1EEF65AE76D7FEF /* DualCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualCamera.swift; sourceTree = "<group>"; };
 		9F6AC0D22B0029C9AB2077F9 /* CameraControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControl.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				A7FD3BFFA33F449E913E0A5F /* Config */,
+				735BD4299F3C6754F748E91E /* Resources */,
 				955B33085FE8725C3C372909 /* Sources */,
 				E1B581FE1F5BF2B0EBCE7F06 /* Products */,
 			);
@@ -108,6 +111,14 @@
 				D846B39EE2E9842767BBC5D2 /* HeatPrompt.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		735BD4299F3C6754F748E91E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8C8C1EA5BD6AE4B0631DC6F4 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		955B33085FE8725C3C372909 /* Sources */ = {
@@ -214,6 +225,7 @@
 			files = (
 				51C08B4E6EDF3574CD512A1E /* AppIcon.icon in Resources */,
 				08EAF3B5A155C38D72B2C7AF /* Assets.xcassets in Resources */,
+				F1819A93CF6C137F08252FFD /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +335,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -384,7 +396,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

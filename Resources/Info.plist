@@ -29,7 +29,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>DualShot records sound with your videos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>DualShot saves your videos to your library.</string>
+	<string>DualShot saves your videos and photos to your library.</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchScreen</key>
