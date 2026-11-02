@@ -1,0 +1,22 @@
+# Xcode build output
+build/
+DerivedData/
+*.xcarchive
+*.ipa
+
+# User-specific Xcode state
+xcuserdata/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Personal signing settings
+Config/Local.xcconfig
+
+# Local tooling
+.claude/
+
+# Icon explorations (large; kept locally)
+design/IconDrafts/
+design/old-screenshots/

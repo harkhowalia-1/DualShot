@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DualShot – Front and back camera at once, on the iPhone you already have</title>
+<meta name="description" content="Dual Capture is an iPhone 17 exclusive. DualShot records the front and back cameras at the same time on iPhone XS, XR and newer, and saves each camera as its own file.">
+<meta property="og:title" content="DualShot – Dual Capture for the iPhone you already have">
+<meta property="og:description" content="Record the front and back cameras at once on iPhone XS, XR and newer. Separate files, a combined video, photos too.">
+<meta property="og:image" content="img/pip.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b0f">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<style>
+:root {
+  --bg: #fbfbfd; --bg2: #f2f2f6; --card: #ffffff; --text: #1d1d1f; --muted: #6e6e73;
+  --line: rgba(0,0,0,.08); --accent: #ff8a3d; --accent2: #4a63e6; --good: #1e9e57;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0b0b0f; --bg2: #141419; --card: #1b1b21; --text: #f5f5f7; --muted: #a1a1a6;
+          --line: rgba(255,255,255,.1); --accent: #ffa25c; --accent2: #7a8fff; --good: #3ccf7c; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; }
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+nav { position: sticky; top: 0; z-index: 10; backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; gap: 10px; height: 52px; }
+nav img { width: 28px; height: 28px; border-radius: 7px; }
+nav strong { font-size: 17px; }
+nav .sp { flex: 1; }
+nav a.small { font-size: 14px; color: var(--muted); margin-left: 18px; }
+
+.hero { text-align: center; padding: 72px 0 32px; }
+.hero img.icon { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+.eyebrow { color: var(--accent); font-weight: 600; font-size: 15px; letter-spacing: .02em; margin: 22px 0 8px; }
+h1 { font-size: clamp(38px, 7vw, 72px); line-height: 1.04; letter-spacing: -.025em; margin: 0 auto; max-width: 15ch; }
+.lede { font-size: clamp(19px, 2.4vw, 24px); color: var(--muted); max-width: 34ch; margin: 18px auto 0; line-height: 1.35; }
+.ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 980px;
+  font-weight: 600; font-size: 16px; border: 1px solid transparent; }
+.btn:hover { text-decoration: none; filter: brightness(1.05); }
+.btn.primary { background: var(--text); color: var(--bg); }
+.btn.ghost { border-color: var(--line); color: var(--text); background: var(--card); }
+.note { color: var(--muted); font-size: 14px; margin-top: 14px; }
+
+.phones { display: flex; justify-content: center; gap: 22px; padding: 36px 0 64px; overflow: hidden; }
+.phone { width: min(260px, 40vw); aspect-ratio: 552/1200; border-radius: 36px; overflow: hidden; flex: none;
+  background: #000; border: 8px solid #111; box-shadow: 0 30px 60px rgba(0,0,0,.25); }
+.phone img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone.side { transform: translateY(40px) scale(.9); opacity: .95; }
+@media (max-width: 640px) { .phone.side { display: none; } }
+
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+section.alt { background: var(--bg2); }
+h2 { font-size: clamp(30px, 4.6vw, 48px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
+.sub { color: var(--muted); font-size: 20px; max-width: 46ch; margin: 0 0 36px; }
+
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
+.box { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 26px; }
+.box h3 { margin: 0 0 4px; font-size: 21px; }
+.box .tag { font-size: 13px; color: var(--muted); }
+.box ul { list-style: none; padding: 0; margin: 18px 0 0; }
+.box li { padding: 9px 0; border-top: 1px solid var(--line); display: flex; gap: 10px; }
+.box li b { min-width: 22px; }
+.box.ours { border: 2px solid var(--accent); }
+.yes { color: var(--good); } .no { color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+.feat { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.feat .emoji { font-size: 26px; }
+.feat h3 { margin: 10px 0 6px; font-size: 18px; }
+.feat p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.shots { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+.shots figure { margin: 0; flex: none; width: 220px; scroll-snap-align: start; }
+.shots img { width: 100%; border-radius: 26px; border: 6px solid #111; display: block; }
+.shots figcaption { text-align: center; color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+.devices { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--card); border: 1px solid var(--line); border-radius: 980px; padding: 7px 14px; font-size: 15px; }
+.chip.tested { border-color: var(--good); color: var(--good); font-weight: 600; }
+
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; }
+.faq summary { font-weight: 600; cursor: pointer; }
+.faq p { color: var(--muted); margin: 10px 0 0; }
+
+footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <img src="img/icon.png" alt="">
+    <strong>DualShot</strong>
+    <span class="sp"></span>
+    <a class="small" href="#compare">Compare</a>
+    <a class="small" href="#devices">Devices</a>
+    <a class="small" href="https://github.com/harkhowalia-1/DualShot">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <picture>
+    <source srcset="img/icon-dark.png" media="(prefers-color-scheme: dark)">
+    <img class="icon" src="img/icon.png" alt="DualShot app icon">
+  </picture>
+  <p class="eyebrow">Dual Capture, without buying a new iPhone</p>
+  <h1>Front and back camera. At the same time.</h1>
+  <p class="lede">Apple made recording both cameras at once an iPhone&nbsp;17 feature. DualShot brings it to the iPhone you already own, back to iPhone&nbsp;XS.</p>
+  <div class="ctas">
+    <a class="btn primary" href="https://github.com/harkhowalia-1/DualShot">View on GitHub</a>
+    <a class="btn ghost" href="https://github.com/harkhowalia-1/DualShot/subscription">Get notified at launch</a>
+  </div>
+  <p class="note">Free and open source · App Store release coming soon</p>
+</header>
+
+<div class="phones wrap" aria-hidden="true">
+  <div class="phone side"><img src="img/split.png" alt=""></div>
+  <div class="phone"><img src="img/recording.png" alt=""></div>
+  <div class="phone side"><img src="img/photo.png" alt=""></div>
+</div>
+
+<section id="compare" class="alt">
+  <div class="wrap">
+    <h2>The feature Apple kept for iPhone&nbsp;17.</h2>
+    <p class="sub">Your iPhone has had the hardware to run two cameras at once since 2018. DualShot finally lets you use it.</p>
+    <div class="compare">
+      <div class="box">
+        <h3>Dual Capture</h3>
+        <div class="tag">Built into the Camera app</div>
+        <ul>
+          <li><b class="yes">✓</b> iPhone 17, iPhone Air, iPhone 17 Pro and Pro Max</li>
+          <li><b class="no">✕</b> Not on iPhone 17e</li>
+          <li><b class="no">✕</b> Not on iPhone 16 or any earlier iPhone</li>
+        </ul>
+      </div>
+      <div class="box ours">
+        <h3>DualShot</h3>
+        <div class="tag">For iPhone XS, XR and newer</div>
+        <ul>
+          <li><b class="yes">✓</b> Works on iPhones from 2018 on: XS, XR, 11, 12, 13, 14, 15, 16 and 17</li>
+          <li><b class="yes">✓</b> Saves the back and front as two separate files, plus one combined video</li>
+          <li><b class="yes">✓</b> Takes photos with both cameras too</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Pro, but it feels like the Camera app.</h2>
+    <p class="sub">Familiar controls, plus the things you need when you shoot two angles at once.</p>
+    <div class="grid">
+      <div class="feat"><div class="emoji">🎞️</div><h3>Two files, ready to edit</h3><p>The back and front cameras are saved as separate videos, so you can cut between them in any editor. A combined video is saved too.</p></div>
+      <div class="feat"><div class="emoji">🖼️</div><h3>Picture in picture or split</h3><p>Drag the front-camera window to any corner, or split the screen top and bottom. The combined video follows your layout.</p></div>
+      <div class="feat"><div class="emoji">📸</div><h3>Photo mode</h3><p>One tap takes a photo with both cameras at the same moment, in HEIF or JPEG, with flash and a self-timer.</p></div>
+      <div class="feat"><div class="emoji">🔭</div><h3>Zoom while you record</h3><p>Switch between .5×, 1×, 2× and 3× mid-take. DualShot picks the lens pair your iPhone can run next to the front camera.</p></div>
+      <div class="feat"><div class="emoji">🌡️</div><h3>Heat-Up Settings</h3><p>Two cameras work hard. DualShot watches your iPhone's temperature and lowers the frame rate before it has to stop recording.</p></div>
+      <div class="feat"><div class="emoji">⚙️</div><h3>Made for your iPhone</h3><p>On first launch DualShot checks what your iPhone can handle, then offers only the resolutions and frame rates that will work, up to 4K on newer models.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>A closer look.</h2>
+    <div class="shots">
+      <figure><img src="img/pip.png" alt="Picture-in-picture view with the front camera in a corner"><figcaption>Picture in picture</figcaption></figure>
+      <figure><img src="img/split.png" alt="Split view with back camera on top and front camera below"><figcaption>Split view</figcaption></figure>
+      <figure><img src="img/recording.png" alt="Recording with a timer"><figcaption>Recording</figcaption></figure>
+      <figure><img src="img/photo.png" alt="Photo mode"><figcaption>Photo mode</figcaption></figure>
+      <figure><img src="img/controls.png" alt="Controls sheet"><figcaption>Controls</figcaption></figure>
+      <figure><img src="img/lenses.png" alt="Back lens choices"><figcaption>Back lenses</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="devices">
+  <div class="wrap">
+    <h2>Works on these iPhones.</h2>
+    <p class="sub">Any iPhone with an A12 chip or newer that runs iOS 17 or later. Older models record at lower resolutions; DualShot picks the best your iPhone can do.</p>
+    <div class="devices">
+      <span class="chip">iPhone XS / XS Max</span><span class="chip">iPhone XR</span>
+      <span class="chip">iPhone 11 series</span><span class="chip">iPhone 12 series</span>
+      <span class="chip">iPhone 13 series</span><span class="chip tested">iPhone 14 Pro · tested</span>
+      <span class="chip">iPhone 14 series</span><span class="chip">iPhone 15 series</span>
+      <span class="chip">iPhone 16 series</span><span class="chip">iPhone 16e</span>
+      <span class="chip">iPhone 17 series</span>
+    </div>
+    <p class="note" style="margin-top:18px">iPad support is coming. Tested so far on iPhone 14 Pro; if you try another model, tell us how it went on GitHub.</p>
+  </div>
+</section>
+
+<section class="alt faq">
+  <div class="wrap">
+    <h2>Questions.</h2>
+    <details><summary>Is this the same as Apple's Dual Capture?</summary><p>It's the same idea, recording the front and back cameras at once, built independently with Apple's public camera APIs. DualShot also saves each camera as its own file and takes dual photos.</p></details>
+    <details><summary>Why doesn't my older iPhone have this already?</summary><p>Apple offers Dual Capture only in the Camera app on the iPhone 17 lineup. The ability to run two cameras at once has been available to apps since iOS 13 on iPhones with an A12 chip or newer.</p></details>
+    <details><summary>Will it overheat my iPhone?</summary><p>Running two cameras is demanding. With Heat-Up Settings on, DualShot lowers the frame rate as your iPhone warms up so recording keeps going. You can turn it off if you'd rather keep full quality.</p></details>
+    <details><summary>Does it record sound?</summary><p>Yes, one microphone track shared by both files, so they stay in sync.</p></details>
+    <details><summary>How do I get it?</summary><p>The App Store release is coming. Developers can build it now from the source on GitHub with Xcode.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DualShot · <a href="https://github.com/harkhowalia-1/DualShot">GitHub</a></span>
+    <span>iPhone and iPad are trademarks of Apple Inc. DualShot is not affiliated with or endorsed by Apple.</span>
+  </div>
+</footer>
+</body>
+</html>
