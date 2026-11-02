@@ -24,7 +24,7 @@ enum SaveOption: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .all: "The back and front as their own files, plus one with both"
         case .angles: "The back and front as their own files, for editing"
-        case .combined: "One file with both cameras, like Dual Capture"
+        case .combined: "One file with both cameras, in your layout"
         }
     }
 
