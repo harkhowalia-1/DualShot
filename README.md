@@ -4,12 +4,6 @@
 <p align="center"><b>Record yourself and the world around you, on the iPhone you already have.</b></p>
 <p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · Version 1.0 is in App Store review ($2.99)</p>
 
-## Support
-
-If you enjoy DualShot, you can support me here:
-
-<a href="https://buymeacoffee.com/harkhowalia"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy me a coffee" height="50"></a>
-
 ---
 
 Apple's **Dual Capture**, which records the front and back cameras at once, only exists on the iPhone 17 lineup (iPhone 17, iPhone Air, iPhone 17 Pro and Pro Max). But every iPhone with an A12 chip or newer, from **iPhone XS and XR** on, has been able to run two cameras at once since iOS 13.
@@ -74,3 +68,9 @@ With a free Apple ID, sideloaded apps need re-signing every 7 days.
 ---
 
 iPhone and iPad are trademarks of Apple Inc. DualShot is not affiliated with or endorsed by Apple.
+
+## Support
+
+If you enjoy this project, you can support me here:
+
+<a href="https://buymeacoffee.com/harkhowalia"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy me a coffee" height="50"></a>
