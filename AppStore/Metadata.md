@@ -99,7 +99,11 @@ No account or network connection is needed. The app collects no data.
 
 **Contact:** your name, phone number and email (kept private, only for App Review).
 
-## Pricing (your call)
+## Pricing
+
+**Current:** free (since November 3, 2026). The notes below were the original options.
+
+### Options
 
 The code is open source, so people pay on the App Store for convenience: one tap to install, automatic updates, no re-signing every 7 days. Options:
 

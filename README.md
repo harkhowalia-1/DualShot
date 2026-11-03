@@ -2,7 +2,7 @@
 
 <h1 align="center">DualShot</h1>
 <p align="center"><b>Record yourself and the world around you, on the iPhone you already have.</b></p>
-<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · Version 1.0 is in App Store review ($2.99)</p>
+<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · Free · Version 1.0 is in App Store review</p>
 
 ---
 

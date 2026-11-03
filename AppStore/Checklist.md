@@ -1,6 +1,6 @@
 # Publishing DualShot 1.0
 
-**Status:** submitted for App Review on November 2, 2026 (build 1.0 (2), $2.99, all 175 countries, releases automatically when approved).
+**Status:** submitted for App Review on November 2, 2026 (build 1.0 (2), free (changed from $2.99 on November 3, 2026), all 175 countries, releases automatically when approved).
 
 Done and ready:
 
