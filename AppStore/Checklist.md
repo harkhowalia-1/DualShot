@@ -1,6 +1,6 @@
 # Publishing DualShot 1.0
 
-**Status:** submitted for App Review on November 2, 2026 (build 1.0 (2), free (changed from $2.99 on November 3, 2026), all 175 countries, releases automatically when approved).
+**Status:** live on the [App Store](https://apps.apple.com/app/dualshot-dual-camera/id6829948725) (version 1.0, build 2, free, all 175 countries). Submitted November 2, 2026; switched from $2.99 to free on November 3, 2026.
 
 Done and ready:
 

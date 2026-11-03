@@ -2,7 +2,8 @@
 
 <h1 align="center">DualShot</h1>
 <p align="center"><b>Record yourself and the world around you, on the iPhone you already have.</b></p>
-<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · Free · Version 1.0 is in App Store review</p>
+<p align="center"><a href="https://apps.apple.com/app/dualshot-dual-camera/id6829948725"><img src="docs/img/app-store-badge.svg" alt="Download on the App Store" height="50"></a></p>
+<p align="center"><a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · <a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa">Download unsigned IPA</a></p>
 
 ---
 
@@ -38,6 +39,10 @@ DualShot uses that ability, so you get dual-camera video and photos on the iPhon
 - iPad support is planned.
 
 ## Install
+
+Get DualShot free from the [App Store](https://apps.apple.com/app/dualshot-dual-camera/id6829948725) (iPhone XS, XR or newer, iOS 17 or later).
+
+To sideload it instead:
 
 1. Download [DualShot-unsigned.ipa](https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa) from the [latest release](https://github.com/harkhowalia-1/DualShot/releases/latest).
 2. Install it with a sideloading tool that signs it with your Apple ID, such as [AltStore](https://altstore.io) or [Sideloadly](https://sideloadly.io).

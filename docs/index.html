@@ -10,6 +10,7 @@
 <meta property="og:image" content="img/store/1-mountain.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0b0f">
+<meta name="apple-itunes-app" content="app-id=6829948725">
 <link rel="icon" href="img/icon.png">
 <link rel="apple-touch-icon" href="img/icon.png">
 <style>
@@ -43,12 +44,14 @@ nav a.small { font-size: 14px; color: var(--muted); margin-left: 18px; }
 .eyebrow { color: var(--accent); font-weight: 600; font-size: 15px; letter-spacing: .02em; margin: 22px 0 8px; }
 h1 { font-size: clamp(38px, 7vw, 72px); line-height: 1.04; letter-spacing: -.025em; margin: 0 auto; max-width: 15ch; }
 .lede { font-size: clamp(19px, 2.4vw, 24px); color: var(--muted); max-width: 34ch; margin: 18px auto 0; line-height: 1.35; }
-.ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+.ctas { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 980px;
   font-weight: 600; font-size: 16px; border: 1px solid transparent; }
 .btn:hover { text-decoration: none; filter: brightness(1.05); }
 .btn.primary { background: var(--text); color: var(--bg); }
 .btn.ghost { border-color: var(--line); color: var(--text); background: var(--card); }
+.badge { display: inline-flex; }
+.badge img { display: block; height: 54px; width: auto; }
 .note { color: var(--muted); font-size: 14px; margin-top: 14px; }
 
 .phones { display: flex; justify-content: center; gap: 22px; padding: 36px 0 64px; overflow: hidden; }
@@ -116,14 +119,14 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <source srcset="img/icon-dark.png" media="(prefers-color-scheme: dark)">
     <img class="icon" src="img/icon.png" alt="DualShot app icon">
   </picture>
-  <p class="eyebrow">Coming soon to the App Store</p>
+  <p class="eyebrow">Now on the App Store</p>
   <h1>Record yourself and the world around you.</h1>
   <p class="lede">Simultaneous front and rear video capture, an iPhone&nbsp;17 feature, on the iPhone you already own, back to iPhone&nbsp;XS.</p>
   <div class="ctas">
-    <a class="btn primary" href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa">Download unsigned IPA</a>
+    <a class="badge" href="https://apps.apple.com/app/dualshot-dual-camera/id6829948725"><img src="img/app-store-badge.svg" alt="Download on the App Store" height="54"></a>
     <a class="btn ghost" href="https://github.com/harkhowalia-1/DualShot">View on GitHub</a>
   </div>
-  <p class="note">Version 1.0 · Submitted to the App Store · Try it today with <a href="#install">AltStore or Sideloadly</a></p>
+  <p class="note">Version 1.0 · iPhone XS and later · Open source on <a href="https://github.com/harkhowalia-1/DualShot">GitHub</a></p>
 </header>
 
 <div class="phones wrap" aria-hidden="true">
@@ -206,8 +209,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 
 <section id="install">
   <div class="wrap">
-    <h2>Try it today.</h2>
-    <p class="sub">DualShot 1.0 is in App Store review and will be free. Until it's live, you can install the unsigned IPA with a sideloading tool, which signs it with your own Apple ID.</p>
+    <h2>Get DualShot.</h2>
+    <p class="sub">DualShot is free on the App Store for iPhone XS, XR and newer with iOS 17 or later.</p>
+    <div class="ctas" style="justify-content:flex-start;margin:0 0 40px"><a class="badge" href="https://apps.apple.com/app/dualshot-dual-camera/id6829948725"><img src="img/app-store-badge.svg" alt="Download on the App Store" height="54"></a></div>
+    <h3>Or sideload it</h3>
+    <p class="note" style="margin:0 0 20px">The same app, unsigned, for installing with your own Apple ID.</p>
     <div class="grid">
       <div class="feat"><div class="emoji">1️⃣</div><h3>Download the IPA</h3><p><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa">DualShot-unsigned.ipa</a> from the latest GitHub release.</p></div>
       <div class="feat"><div class="emoji">2️⃣</div><h3>Open a sideloader</h3><p>Use <a href="https://altstore.io">AltStore</a> or <a href="https://sideloadly.io">Sideloadly</a> on your Mac or PC, signed in with your Apple ID.</p></div>
@@ -225,7 +231,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <details><summary>Why doesn't my older iPhone have this already?</summary><p>Apple offers Dual Capture only in the Camera app on the iPhone 17 lineup. The ability to run two cameras at once has been available to apps since iOS 13 on iPhones with an A12 chip or newer.</p></details>
     <details><summary>Will it overheat my iPhone?</summary><p>Running two cameras is demanding. With Heat-Up Settings on, DualShot lowers the frame rate as your iPhone warms up so recording keeps going. You can turn it off if you'd rather keep full quality.</p></details>
     <details><summary>Does it record sound?</summary><p>Yes, one microphone track shared by both files, so they stay in sync.</p></details>
-    <details><summary>How do I get it?</summary><p>Download the <a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa">unsigned IPA</a> and install it with AltStore or Sideloadly, or build it from the source on GitHub with Xcode. Version 1.0 is in App Store review and will be free.</p></details>
+    <details><summary>How do I get it?</summary><p>Download it free from the <a href="https://apps.apple.com/app/dualshot-dual-camera/id6829948725">App Store</a>. You can also download the <a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa">unsigned IPA</a> and install it with AltStore or Sideloadly, or build it from the source on GitHub with Xcode. </p></details>
   </div>
 </section>
 
