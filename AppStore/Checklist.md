@@ -1,5 +1,7 @@
 # Publishing DualShot 1.0
 
+**Status:** submitted for App Review on November 2, 2026 (build 1.0 (2), $2.99, all 175 countries, releases automatically when approved).
+
 Done and ready:
 
 - [x] Signed App Store build, version 1.0 (1): in Xcode › Window › Organizer, and `build/DualShot-1.0-AppStore.ipa` (not in git)
