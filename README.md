@@ -1,8 +1,8 @@
 <p align="center"><img src="docs/img/icon.png" width="128" alt="DualShot icon"></p>
 
 <h1 align="center">DualShot</h1>
-<p align="center"><b>Front and back camera at the same time, on the iPhone you already have.</b></p>
-<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · App Store release coming soon</p>
+<p align="center"><b>Record yourself and the world around you, on the iPhone you already have.</b></p>
+<p align="center"><a href="https://github.com/harkhowalia-1/DualShot/releases/latest/download/DualShot-unsigned.ipa"><b>⬇︎ Download unsigned IPA</b></a> · <a href="https://harkhowalia-1.github.io/DualShot/">Website</a> · Version 1.0 is in App Store review ($2.99)</p>
 
 ---
 
@@ -11,15 +11,19 @@ Apple's **Dual Capture**, which records the front and back cameras at once, only
 DualShot uses that ability, so you get dual-camera video and photos on the iPhone you already own.
 
 <p align="center">
-  <img src="docs/img/pip.png" width="200" alt="Picture in picture">
-  <img src="docs/img/split.png" width="200" alt="Split view">
-  <img src="docs/img/photo.png" width="200" alt="Photo mode">
-  <img src="docs/img/controls.png" width="200" alt="Controls">
+  <img src="docs/img/store/1-mountain.jpg" width="250" alt="Record yourself and the world around you">
+  <img src="docs/img/store/3-tokyo.jpg" width="250" alt="Two cameras, two separate files">
+  <img src="docs/img/store/4-beach.jpg" width="250" alt="Picture in picture or split screen">
+</p>
+<p align="center">
+  <img src="docs/img/store/2-concert.jpg" width="250" alt="Works on the iPhone you already have">
+  <img src="docs/img/store/5-birthday.jpg" width="250" alt="Both sides of every moment">
+  <img src="docs/img/store/6-festival.jpg" width="250" alt="Made for long takes">
 </p>
 
 ## Features
 
-- **Two cameras, two files.** The back and front cameras are saved as separate videos, ready to edit, plus a combined video in your layout.
+- **Two cameras, two files.** The back and front cameras are saved as separate videos, ready to edit, plus a combined video in your layout (choose in Export Options).
 - **Picture in picture or split.** Drag the front window to any corner, or split the screen.
 - **Photo mode.** Take a photo with both cameras at once, in HEIF or JPEG, with flash and a self-timer.
 - **Zoom while recording.** Change zoom mid-take across every back lens your iPhone has (up to 3× on Pro models). On Pros that can't run all three lenses next to the front camera, a Back Lenses control picks the pair; iPhones with one or two back lenses never see it.
@@ -53,7 +57,11 @@ With a free Apple ID, sideloaded apps need re-signing every 7 days.
    xcodegen generate
    open DualShot.xcodeproj
    ```
-4. Run it on an iPhone. The Simulator has no cameras, but you can preview the interface with the launch argument `-DualShotDemo pip`.
+4. Run it on an iPhone. The Simulator has no cameras, but you can preview the interface with the launch argument `-DualShotDemo pip` (add `-DemoBack <image> -DemoFront <image>` to show real photos).
+
+## App Store screenshots
+
+`AppStore/make-screenshots.swift` turns the app screens in `AppStore/AppScreens` into the App Store images in `AppStore/Screenshots-6.3in` and `-6.9in`.
 
 `BLUEPRINT.md` explains how the capture engine works.
 
