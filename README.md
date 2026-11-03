@@ -34,7 +34,7 @@ DualShot uses that ability, so you get dual-camera video and photos on the iPhon
 ## Requirements
 
 - iPhone XS, XS Max, XR or newer (A12 chip or later), iOS 17 or later
-- Tested on iPhone 14 Pro. Reports from other models are welcome in [Issues](https://github.com/harkhowalia-1/DualShot/issues).
+- Questions or bugs: [Issues](https://github.com/harkhowalia-1/DualShot/issues).
 - iPad support is planned.
 
 ## Install
